@@ -1,0 +1,27 @@
+#include <gmock/gmock.h>
+#include <gmock-free/gmock-free.h>
+
+MOCK_FREE_FUNC(int, sum, (int));
+MOCK_FREE_FUNC(double, multiply, (double, double));
+
+class MockTest : public ::testing::Test {
+protected:
+    void TearDown() override {
+
+        ::testing::GlobalMockObject::Verify();
+    }
+};
+TEST_F(MockTest, mock_free_function)
+{
+    ON_FREE_CALL(sum(1)).WillByDefault(::testing::Return(2));
+//    sum(1, 2);
+    EXPECT_EQ(2, sum(1));
+
+}
+
+TEST_F(MockTest, mock_multiply_function)
+{
+    EXPECT_FREE_CALL(multiply(1.0, 2.0)).WillOnce(::testing::Return(2));
+//    multilpy (1, 2);
+    EXPECT_EQ(2, multiply(1.0, 2.0));
+}
