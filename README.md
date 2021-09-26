@@ -47,12 +47,13 @@ TEST(TestGlobal, CanMultiplyGlobal)
 {
     EXPECT_FREE_CALL(multiply(1, 2)).Times(1);
     multiply(1, 2);
+    GlobalMockObject::Verify();
 }
 ```
 
 Also you can use `ON_FREE_CALL` to specify default behavior.
 
-[gmock-free](https://github.com/code-in-cpp/gmock-free) supports more than 10 arguments with [gtest version 1.8.1](https://github.com/google/googletest/releases/tag/release-1.8.1). But it requires [gmock-more-args version 1.0.1](https://github.com/apriorit/gmock-more-args/releases/tag/1.0.1) in case you use [gtest version 1.8.0](https://github.com/google/googletest/releases/tag/release-1.8.0)
+[gmock-free](https://github.com/code-in-cpp/gmock-free) supports more than 15 arguments with [gtest version 1.11.0](https://github.com/google/googletest/releases/tag/release-1.11.0).
 
 # Known issues
 
