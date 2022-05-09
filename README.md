@@ -32,7 +32,7 @@ MOCK_FREE_FUNC(double, multiply, (double, double));
 ```
 You can check call count of such function using `EXPECT_FREE_CALL` macro, same as you used `EXPECT_CALL` macro for classes:
 ```cpp
-EXPECT_GLOBAL_CALL(multiply, (1, 2));
+EXPECT_FREE_CALL(multiply, (1, 2));
 ```
 
 The `.Times(...)` and other methods will be work too.
