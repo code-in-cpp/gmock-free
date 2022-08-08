@@ -19,7 +19,8 @@ set(BUILD_GTEST ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 add_executable(gmock_free test/gmock-free-test.cpp
-    test/gmock-free-test2.cpp)
+    test/gmock-free-test2.cpp
+    test/mock_external_method.cpp)
 target_link_libraries(gmock_free
     PRIVATE
     gtest

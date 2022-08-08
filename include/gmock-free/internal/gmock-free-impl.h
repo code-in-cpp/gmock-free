@@ -78,24 +78,24 @@ namespace testing {
 
 
 #define FREE_GMOCK_INTERNAL_MOCK_METHOD_IMPL_(_N, _Ret, _MethodName, _Signature)      \
-    inline ::testing::FreeFunction<GMOCK_PP_REMOVE_PARENS(_Signature)>& _MethodName##_mock_function_() \
+    ::testing::FreeFunction<GMOCK_PP_REMOVE_PARENS(_Signature)>& _MethodName##_mock_function_() \
      {                                                                                \
             static ::testing::FreeFunction<GMOCK_PP_REMOVE_PARENS(_Signature)> obj{#_MethodName}; \
             return obj;                                                               \
      }                                                                                \
-    inline _Ret _MethodName(GMOCK_PP_REPEAT(GMOCK_INTERNAL_PARAMETER, _Signature, _N)) {     \
+     _Ret _MethodName(GMOCK_PP_REPEAT(GMOCK_INTERNAL_PARAMETER, _Signature, _N)) {     \
         return _MethodName##_mock_function_().Call(                                   \
             GMOCK_PP_REPEAT(FREE_METHOD_ARG_, _Signature, _N)                         \
         );                                                                            \
     }                                                                                 \
-    inline ::testing::internal::MockSpec<GMOCK_PP_REMOVE_PARENS(_Signature)>                 \
+    ::testing::internal::MockSpec<GMOCK_PP_REMOVE_PARENS(_Signature)>                 \
         gmock_Call_##_MethodName                                                      \
         (GMOCK_PP_REPEAT(GMOCK_INTERNAL_MATCHER_PARAMETER, _Signature, _N))           \
     {                                                                                 \
         return _MethodName##_mock_function_().gmock_Call(                             \
         GMOCK_PP_REPEAT(GMOCK_INTERNAL_MATCHER_ARGUMENT, , _N));                      \
     }                                                                                 \
-    inline ::testing::internal::MockSpec<GMOCK_PP_REMOVE_PARENS(_Signature)>                 \
+    ::testing::internal::MockSpec<GMOCK_PP_REMOVE_PARENS(_Signature)>                 \
         gmock_Call_##_MethodName                                                      \
         (const ::testing::internal::WithoutMatchers&,                                 \
         ::testing::internal::Function<                                                \
@@ -104,6 +104,16 @@ namespace testing {
         return _MethodName##_mock_function_().gmock_Call(GMOCK_PP_REPEAT(             \
             GMOCK_INTERNAL_A_MATCHER_ARGUMENT, _Signature, _N));                      \
     }
+
+#define DECLARE_FREE_GMOCK_INTERNAL_MOCK_METHOD_IMPL_(_N, _Ret, _MethodName, _Signature)      \
+    ::testing::internal::MockSpec<GMOCK_PP_REMOVE_PARENS(_Signature)>                 \
+        gmock_Call_##_MethodName                                                      \
+        (GMOCK_PP_REPEAT(GMOCK_INTERNAL_MATCHER_PARAMETER, _Signature, _N));        \
+    ::testing::internal::MockSpec<GMOCK_PP_REMOVE_PARENS(_Signature)>                 \
+        gmock_Call_##_MethodName                                                      \
+        (const ::testing::internal::WithoutMatchers&,                                 \
+        ::testing::internal::Function<                                                \
+          GMOCK_PP_REMOVE_PARENS(_Signature)>*);
 
 #define GMOCK_ON_FREE_CALL_IMPL_(Setter, call) \
   (gmock_Call_##call)(::testing::internal::GetWithoutMatchers(), \

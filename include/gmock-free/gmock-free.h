@@ -17,6 +17,13 @@
     GMOCK_PP_NARG0 _Args, _Ret, _MethodName, \
     (GMOCK_INTERNAL_SIGNATURE(_Ret, _Args)))
 
+#define DECL_MOCK_FREE_FUNC(_Ret, _MethodName, _Args)                          \
+    GMOCK_INTERNAL_ASSERT_PARENTHESIS(_Args);                               \
+    GMOCK_INTERNAL_ASSERT_VALID_SIGNATURE(                                  \
+    GMOCK_PP_NARG0 _Args, GMOCK_INTERNAL_SIGNATURE(_Ret, _Args));           \
+    DECLARE_FREE_GMOCK_INTERNAL_MOCK_METHOD_IMPL_(                                        \
+    GMOCK_PP_NARG0 _Args, _Ret, _MethodName, \
+    (GMOCK_INTERNAL_SIGNATURE(_Ret, _Args)))
 
 // similar with gmock ON_CALL
 // ON_FREE_CALL(sum(Eq(1), Eq(2))).WillByDefault(Return(2));

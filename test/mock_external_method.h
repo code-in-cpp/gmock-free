@@ -6,6 +6,6 @@
 #define GMOCK_FREE_MOCK_EXTERNAL_METHDO_H
 #include "gmock-free/gmock-free.h"
 
-MOCK_FREE_FUNC(double, multiply, (double, double));
+DECL_MOCK_FREE_FUNC(double, multiply, (double, double));
 
 #endif //GMOCK_FREE_MOCK_EXTERNAL_METHDO_H
