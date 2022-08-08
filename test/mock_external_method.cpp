@@ -4,4 +4,5 @@
 
 #include "mock_external_method.h"
 
-MOCK_FREE_FUNC(double, multiply, (double, double))
+MOCK_FREE_FUNC(double, multiply, (double, double));
+MOCK_FREE_FUNC(int, sum, (int));

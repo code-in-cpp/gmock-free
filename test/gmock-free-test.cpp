@@ -1,7 +1,7 @@
 #include <gmock/gmock.h>
 #include <gmock-free/gmock-free.h>
 #include "mock_external_method.h"
-MOCK_FREE_FUNC(int, sum, (int));
+
 
 class MockTest : public ::testing::Test {
 protected:
